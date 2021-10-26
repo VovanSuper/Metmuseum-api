@@ -1,10 +1,16 @@
 import { Handler } from '../types';
+import ObjectSvc from "../services/objects.svc";
 import handlers from '../utils/http-handlers';
-
 const { okHandler } = handlers;
 
-export const Objects: Handler = (req, res) => okHandler(res, 'All Objects');
-export const Object: Handler = (req, res) => {
+export const AllObjects: Handler = async (req, res) => {
+  const objects = await ObjectSvc.getAllObjects();
+  okHandler(res, { objects });
+};
 
-  okHandler(res, '');
+export const ParamObject: Handler = async (req, res) => {
+  const { id: objectId } = req.params || {};
+  const object = await ObjectSvc.getObject(objectId);
+
+  okHandler(res, { object });
 };

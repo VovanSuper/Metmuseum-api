@@ -25,7 +25,7 @@
   "homepage": "https://github.com/VovanSuper/Metmuseum-api#readme",
   "main": "server/index.js",
   "scripts": {
-    "start": "lerna start",
+    "start:dev": "lerna run start:dev --stream",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -34,18 +34,20 @@
     "@types/node": "^16.11.6",
     "@typescript-eslint/eslint-plugin": "^5.2.0",
     "@typescript-eslint/parser": "^5.2.0",
-    "eslint": "^8.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.11.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsdoc": "^37.0.3",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
+    "kill-port": "^1.6.1",
     "lerna": "^4.0.0",
     "lint-staged": "^11.2.5",
-    "nodemon": "2.0.14",
+    "nodemon": "^2.0.14",
     "prettier": "^2.4.1",
-    "ts-node": "10.4.0",
+    "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
   }
 }

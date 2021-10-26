@@ -1,7 +1,7 @@
 {
   "packages": [
-    "api/*",
-    "client/*"
+    "api/**",
+    "client/**"
   ],
   "version": "0.0.2",
   "npmClient": "npm"
