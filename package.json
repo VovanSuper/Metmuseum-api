@@ -1,0 +1,30 @@
+{
+  "name": "metmuseum-api",
+  "version": "0.0.1",
+  "description": "Simple Metmuseum node api with sample front-end tester",
+  "author": {
+    "name": "Vladimir Ovsyukov",
+    "email": "vovansuper@mail.ru"
+  },
+  "license": "GPLv3",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VovanSuper/Metmuseum-api.git"
+  },
+  "keywords": [
+    "Node.js",
+    "express.js",
+    "axios",
+    "jest",
+    "supertest",
+    "React"
+  ],
+  "bugs": {
+    "url": "https://github.com/VovanSuper/Metmuseum-api/issues"
+  },
+  "homepage": "https://github.com/VovanSuper/Metmuseum-api#readme",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
