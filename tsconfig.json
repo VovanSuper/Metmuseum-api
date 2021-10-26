@@ -1,11 +1,12 @@
 {
   "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
-    "target": "es2015",
+    "target": "es2017",
     "moduleResolution": "node",
     "module": "commonjs",
     "strict": true,
-    "typeRoots": ["./node_modules/@types"]
+    "esModuleInterop": true,
+    "typeRoots": ["node_modules/@types"]
   },
   "exclude": ["node_modules"]
 }
