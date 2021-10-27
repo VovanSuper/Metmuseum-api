@@ -1,13 +1,33 @@
 {
   "name": "client",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "description": "Simple Metmuseum React sample front-end tester",
+  "author": {
+    "name": "Vladimir Ovsyukov",
+    "email": "vovansuper@mail.ru"
+  },
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VovanSuper/Metmuseum-api.git"
+  },
+  "keywords": [
+    "Node.js",
+    "express.js",
+    "axios",
+    "jest",
+    "supertest",
+    "React"
+  ],
+  "bugs": {
+    "url": "https://github.com/VovanSuper/Metmuseum-api/issues"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "@types/jest": "^26.0.24",
-    "@types/node": "^12.20.36",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "axios": "^0.24.0",
@@ -17,6 +37,11 @@
     "react-scripts": "4.0.3",
     "typescript": "^4.4.4",
     "web-vitals": "^1.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "@types/react-router-dom": "^5.3.2",
+    "cross-env": "^7.0.3"
   },
   "scripts": {
     "start:dev": "cross-env ENV=development react-scripts start",
@@ -41,9 +66,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/react-router-dom": "^5.3.2",
-    "cross-env": "^7.0.3"
   }
 }
