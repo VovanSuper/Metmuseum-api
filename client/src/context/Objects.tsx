@@ -1,14 +1,14 @@
-// import React, { createContext, ReactNode, useEffect, useState, useReducer } from "react";
-import axios, { AxiosResponse } from "axios";
+// import React, { createContext, ReactNode, useEffect, useState, useReducer } from 'react';
+import axios, { AxiosResponse } from 'axios';
 import { IObjectInfoBase } from '../models/IObject';
 
 const requestSvc = axios.create({
-  baseURL: 'http://localhost:8088'
+  baseURL: 'http://localhost:8088',
 });
 
-export const getAvailableObjectsIds = async () => requestSvc.get('objects').then((resp: AxiosResponse<{ objects: { total: number, objectIDs: number[]; }; }>) => resp.data.objects);
+export const getAvailableObjectsIds = async () => requestSvc.get('objects').then((resp: AxiosResponse<{ objects: { total: number; objectIDs: number[] } }>) => resp.data.objects);
 
-export const getObject = async ({ id }: { id: number; }): Promise<IObjectInfoBase> => {
+export const getObject = async ({ id }: { id: number }): Promise<IObjectInfoBase> => {
   const response = await requestSvc.get(`objects/${id}`);
   const obj = response.data;
   return obj['object'];
@@ -79,7 +79,6 @@ export const getObject = async ({ id }: { id: number; }): Promise<IObjectInfoBas
 
 //   const [timer, setTimer] = useState<TimerGenerator | undefined>(undefined);
 //   const [currentObject, setCurrentObject] = useState<IObjectInfoBase | undefined>(undefined);
-
 
 //   const getAvailableObjectsIds = async () => requestSvc.get('objects').then((resp: AxiosResponse<{ objects: { total: number, objectIDs: number[]; }; }>) => resp.data.objects);
 
