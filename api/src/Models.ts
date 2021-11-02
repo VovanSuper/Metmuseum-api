@@ -16,8 +16,8 @@ export interface IObjects {
 
 export interface IObjectInfoBase {
   objectID: number;
-  objectName: string,
-  title: string,
+  objectName: string;
+  title: string;
   isHighlight: boolean;
   accessionNumber: string;
   accessionYear: number;

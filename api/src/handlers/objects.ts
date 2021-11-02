@@ -1,5 +1,5 @@
-import { Handler } from '../types';
-import ObjectSvc from "../services/objects.svc";
+import { Handler } from '../Models';
+import ObjectSvc from '../services/objects.svc';
 import handlers from '../utils/http-handlers';
 const { okHandler } = handlers;
 

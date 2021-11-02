@@ -25,33 +25,48 @@
   "homepage": "https://github.com/VovanSuper/Metmuseum-api#readme",
   "main": "server/index.js",
   "scripts": {
-    "start:dev": "run-s clean:ports lerna:dev",
+    "start:dev": "run-s clean:ports compose:up lerna:dev",
     "lerna:dev": "lerna run start:dev --stream",
+    "compose:up": "docker-compose up --build -d",
     "clean:ports": "kill-port 8088 3000 3001",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "eslint": "npx eslint .",
+    "eslint-fix": "npx eslint . --fix",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "husky install",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "devDependencies": {
     "@tsconfig/recommended": "1.0.1",
     "@types/express": "^4.17.13",
     "@types/node": "^16.11.6",
-    "@typescript-eslint/eslint-plugin": "^5.2.0",
-    "@typescript-eslint/parser": "^5.2.0",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "5.3.0",
     "cross-env": "^7.0.3",
-    "eslint": "^7.11.0",
-    "eslint-config-prettier": "^8.3.0",
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "^2.25.2",
     "eslint-plugin-jsdoc": "^37.0.3",
     "eslint-plugin-prefer-arrow": "^1.2.3",
     "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^7.0.4",
+    "husky": "^7.0.0",
     "kill-port": "^1.6.1",
     "lerna": "^4.0.0",
-    "lint-staged": "^11.2.5",
+    "lint-staged": "^11.2.6",
     "nodemon": "^2.0.14",
-    "npm-run-all": "4.1.5",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.4.1",
     "ts-node": "^10.4.0",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.4.4"
+    "typescript": "4.4.4"
+  },
+  "lint-staged": {
+    "*.(scss|ts|tsx|html|md)": [
+      "npx prettier --write"
+    ],
+    "*.(ts|tsx)": [
+      "npx eslint --fix"
+    ],
+    "*.js": "eslint --cache --fix"
   }
 }

@@ -1,11 +1,14 @@
 import { AddressInfo } from 'net';
 import express, { urlencoded, json } from 'express';
-import cors from "cors";
+import cors from 'cors';
 import { routes } from './src/routes';
+import { defaultConfig } from './src/utils/helpers';
 
 (() => {
+  console.log({ defaultConfig });
+
   const app = express();
-  const PORT = process.env.PORT ?? 8088;
+  const PORT = process.env.PORT || defaultConfig.PORT || 8088;
 
   app.use(json());
   app.use(urlencoded({ extended: false }));
@@ -17,7 +20,6 @@ import { routes } from './src/routes';
   });
 
   const server = app.listen(PORT, () => {
-    console.log(`Listening @ ${(<AddressInfo>(server.address())).port}`);
+    console.log(`Listening @ ${(<AddressInfo>server.address()).port}`);
   });
-
 })();

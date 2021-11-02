@@ -1,7 +1,8 @@
 import { AllObjects, ParamObject } from './handlers/objects';
+import { objectCacheWare } from './middleware/objCache';
 
 import { requestLoggerWare } from './middleware/requestLogger';
-import { Route } from './types';
+import { Route } from './Models';
 
 export const routes: Route[] = [
   // All Objects
@@ -14,8 +15,7 @@ export const routes: Route[] = [
   {
     method: 'get',
     path: '/objects/:id',
-    middlewares: [requestLoggerWare],
+    middlewares: [requestLoggerWare, objectCacheWare],
     handler: ParamObject,
   },
-
 ];
