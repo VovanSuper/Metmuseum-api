@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react';
-import { start } from 'repl';
 
 export default function useInterval(delay = 1000, callback: Function) {
   console.log('useInterval created ...!');

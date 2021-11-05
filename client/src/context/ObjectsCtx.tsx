@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useRef, useEffect, useState } from 'react';
+import React, { createContext, ReactNode, useEffect, useState } from 'react';
 import useLocalStore, { CURRENT_SLIDES_IDS, CURRENT_SLIDE_KEY_NAME } from '../hooks/useLocalStore';
 import useInterval from '../hooks/useInterval';
 import { IObjectInfoBase } from '../models/IObject';
