@@ -1,7 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export default function useInterval(delay = 1000, callback: Function) {
-  console.log('useInterval created ...!');
   const savedCallback = useRef<Function>();
   const timer = useRef<any>();
 
@@ -9,36 +8,19 @@ export default function useInterval(delay = 1000, callback: Function) {
     savedCallback.current = callback;
   }, [callback]);
 
-  function tick() {
+  function tick(): void {
     console.log('useInterval TICK...!');
     savedCallback.current && savedCallback.current();
   }
-
-  const createTimer = () => {
+  function createTimer() {
     timer.current = setInterval(tick, delay);
-  };
-
-  const dismissTimer = () => {
+  }
+  function dismissTimer() {
     clearInterval(timer.current);
-  };
-  // useEffect(() => {
-  //   if (!!delay) {
-  //     let timerId = setInterval(tick, delay);
-  //     return () => {
-  //       clearInterval(timerId);
-  //       console.log('useInterval clear ...!');
-  //       return;
-  //     };
-  //   }
-  //
-  // }, [delay]);
+  }
 
-  const startTimer = () => {
-    createTimer();
-  };
-  const stopTimer = () => {
-    dismissTimer();
-  };
+  const startTimer = useCallback(createTimer, [delay]);
+  const stopTimer = useCallback(dismissTimer, []);
 
   return { startTimer, stopTimer };
 }

@@ -15,8 +15,6 @@ const TIMER_TIMEOUT = 5000;
 const ObjectsCtx = createContext<CtxProps>({} as CtxProps);
 
 const ObjectsProvider = ({ children }: { children: ReactNode }) => {
-  console.log('Render ObjectsProvider !!!');
-
   const [currentObjectIDs, setCurrentObjectIDs] = useState<number[]>([]);
   const [currentObjIndex, setCurrentObjIndex] = useState<number>(0);
   const [currentObject, setCurrentObject] = useState<IObjectInfoBase>(null as unknown as IObjectInfoBase);
@@ -33,11 +31,9 @@ const ObjectsProvider = ({ children }: { children: ReactNode }) => {
         return prevObjIndex < currentObjectIDs.length - 1 ? prevObjIndex + 1 : 0;
       });
     });
-    console.log('Current Timer (inside useInterval) TICK :: ');
   });
 
   useEffect(() => {
-    console.log(`ComponentDidMount`);
     const iniSlides = () => {
       if (!!!storedSlideIDs.length) {
         console.log('Getting all objectIDs ...');

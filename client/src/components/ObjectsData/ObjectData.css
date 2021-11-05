@@ -1,9 +1,58 @@
 .data-container {
   font-size: x-large;
   text-align: center;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   place-content: center;
+  align-items: center;
+  gap: 2rem;
   color: white;
   width: 100%;
   height: 100%;
+}
+.data-content {
+  width: 100%;
+}
+
+.object-title {
+  font-style: italic;
+  color: #6f84f9;
+  margin: 1em;
+  padding: .5em;
+  border-bottom: 1px solid #f0f8ff1c;
+ 
+}
+.btn-back {
+  margin: auto;
+  flex: 1;
+  width: 50%;
+  font-size: x-large;
+  font-weight: bolder;
+  color: #008cff;
+  background-color: #abb6ff;
+  font-style: italic;
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+.object-info {
+  max-width: 90%;
+  margin: auto;
+  padding: 1rem;
+}
+.object-info__table {
+  font-family: Georgia, serif;
+  border: .1rem solid #24943A;
+  background-color: #D4EED1;
+  color: #577400;
+  width: 100%;
+  text-align: center;
+}
+.object-info__table thead {
+  border-radius: 5rem;
+  color: #350da2;
+  background-color: #ccc;
+}
+
+.object-img {
+  max-height: 25rem;
+  object-fit: contain;
 }

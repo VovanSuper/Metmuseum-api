@@ -18,6 +18,7 @@ export default function ObjectData() {
       setCurrentObject(val);
       storeCurrentSlide(val);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const backHandler = (e: any) => {
@@ -30,14 +31,34 @@ export default function ObjectData() {
   return (
     <div className='data-container'>
       <main className='data-content'>
-        <h2>Object {currentObject.objectName} </h2>
-        <br />
+        <h2 className='object-title'>{currentObject.objectName} </h2>
+
         <div className='object-info'>
-          <span>Title : {currentObject.title}</span>
-          <span>accessionYear : {currentObject.accessionYear}</span>
+          <table className='object-info__table'>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Object Name</th>
+                <th>Accession Number</th>
+                <th>Accession Year</th>
+                <th>Picture</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{currentObject.title}</td>
+                <td>{currentObject.objectName}</td>
+                <td>{currentObject.accessionNumber}</td>
+                <td>{currentObject.accessionYear}</td>
+                <td>
+                  <img className='object-img' src={currentObject.primaryImageSmall || `https://via.placeholder.com/420`} alt={currentObject.objectName} />{' '}
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </main>
-      <button type='button' onClick={backHandler}>
+      <button type='button' className='btn btn-back' onClick={backHandler}>
         Back
       </button>
     </div>

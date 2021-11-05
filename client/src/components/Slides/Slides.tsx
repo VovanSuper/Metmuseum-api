@@ -1,13 +1,8 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-// import { getObjectHttp, getAvailableObjectsIdsHttp } from '../../utils/http';
-// import { ObjectsCtx } from '../context/Objects';
-// import { IObjectInfoBase } from '../../models/IObject';
-// import useLocalStore, { CURRENT_SLIDES_IDS, CURRENT_SLIDE_KEY_NAME } from '../../hooks/useLocalStore';
-import './Slides.css';
+
 import { ObjectsCtx } from '../../context/ObjectsCtx';
+import './Slides.css';
 
 const placeholderUrl = `https://via.placeholder.com/720`;
 
@@ -20,7 +15,7 @@ export default function Slides() {
       console.log('SlidesCmp willUnmount .. calling stopTimer() ....');
       stopTimer();
     };
-  }, []);
+  }, [startTimer, stopTimer]);
 
   useEffect(() => {
     console.log('[SlidesCmp] CurrentOBject UPDATE :::: ', currentObject);
