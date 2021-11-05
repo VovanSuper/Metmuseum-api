@@ -1,10 +1,9 @@
 import Redis, { RedisOptions, Redis as IRedisClient } from 'ioredis';
-import { IObjectInfoBase } from '../Models';
 import { defaultConfig, parseStringToModel } from '../utils/helpers';
 import logger from '../utils/logger';
 
 const { REDIS_PASS, REDIS_PORT } = defaultConfig;
-logger.w({ defaultConfig });
+
 const redisOpts: RedisOptions = {
   // host: REDIS_NET_NAME,
   port: parseInt(REDIS_PORT),
@@ -27,11 +26,11 @@ export default new (class {
     }
   }
 
-  async find(key: string): Promise<IObjectInfoBase | undefined> {
+  async find<T>(key: string): Promise<T | undefined> {
     try {
       if (!this.client) throw Error('Redis Client not set ..!');
       const objString = await this.client.get(key);
-      const objectData: IObjectInfoBase | null = parseStringToModel(objString);
+      const objectData: T | null = parseStringToModel(objString);
       if (!objectData) throw new Error(`Object for key ${key} not found in cache..`);
       return objectData;
     } catch (e: unknown) {
@@ -39,7 +38,7 @@ export default new (class {
     }
   }
 
-  async set(key: string, value: IObjectInfoBase) {
+  async set<T>(key: string, value: T) {
     try {
       if (!this.client) throw Error('Redis Client not set ..!');
       const setResult = await this.client.set(key, JSON.stringify(value));

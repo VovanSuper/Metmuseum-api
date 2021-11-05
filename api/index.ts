@@ -1,12 +1,13 @@
-import { AddressInfo } from 'net';
+import { Server, AddressInfo } from 'net';
 import express, { urlencoded, json } from 'express';
 import cors from 'cors';
 import { routes } from './src/routes';
 import { defaultConfig } from './src/utils/helpers';
+import errorWare from './src/middleware/errorHandler';
+
+let server: Server;
 
 (() => {
-  console.log({ defaultConfig });
-
   const app = express();
   const PORT = process.env.PORT || defaultConfig.PORT || 8088;
 
@@ -19,7 +20,29 @@ import { defaultConfig } from './src/utils/helpers';
     app[method](path, ...middlewares, handler);
   });
 
-  const server = app.listen(PORT, () => {
+  app.use(errorWare);
+
+  server = app.listen(PORT, () => {
     console.log(`Listening @ ${(<AddressInfo>server.address()).port}`);
   });
 })();
+
+function shutdownHandler() {
+  try {
+    if (server)
+      setTimeout(() => {
+        server.close(err => {
+          if (err) {
+            return console.error(err);
+          }
+          console.log('Shutting down... ');
+          process.exit();
+        });
+      }, 0);
+  } catch (e) {
+    if (e instanceof Error) console.error(`Error shutting down :: ${e.message || e}`);
+  }
+}
+
+process.on('SIGINT', shutdownHandler);
+process.on('SIGTERM', shutdownHandler);

@@ -1,26 +1,31 @@
-import axios, { AxiosResponse } from 'axios';
-import { IObjectInfoBase } from '../Models';
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import { IObjectInfoBase, IObjects } from '../Models';
 import ApiError from '../utils/Error';
+import { defaultConfig } from '../utils/helpers';
 import logger from '../utils/logger';
 import cacheSvc from './redis.svc';
 
-const $http = axios.create({
-  baseURL: 'https://collectionapi.metmuseum.org/public/collection/v1/objects',
+const { err } = logger;
+const $http: AxiosInstance = axios.create({
+  baseURL: process.env.MET_MUS_API_URL,
 });
 
 export default class {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
-  static getAllObjects(): Promise<IObjectInfoBase[]> {
+  static getAllObjects(): Promise<IObjects> {
     return $http
-      .get<IObjectInfoBase[]>('')
-      .then((response: AxiosResponse) => {
+      .get<IObjects>('')
+      .then(async (response: AxiosResponse) => {
         if (response.status !== 200) {
           throw ApiError.BadRequest('Something went wrong..!');
         }
-        return response.data as Array<IObjectInfoBase>;
+        const objectIDs = response.data as IObjects;
+        const setToCacheResult = await cacheSvc.set(defaultConfig.REDIS_OBJECTS_IDS_KEY, objectIDs);
+        logger.l(`Trying to all ObjectsIDs to Cache ... result: ${setToCacheResult === 'OK' ? 'Success' : 'Failed!'}`);
+
+        return objectIDs;
       })
-      .catch((error: Error) => {
-        logger.err(error.message);
+      .catch((error: AxiosError) => {
+        if (error['code'] == 'ETIMEDOUT') err(error.message);
         throw error;
       });
   }
@@ -31,11 +36,15 @@ export default class {
       if (response.status !== 200) {
         throw ApiError.BadRequest('Something went wrong..!');
       }
-      const setToCacheResult = await cacheSvc.set(id.toString(), response.data);
+      const data = response.data;
+      const setToCacheResult = await cacheSvc.set(id.toString(), data);
       logger.l(`Trying to set value for key ${id} to Cache ... result: ${setToCacheResult === 'OK' ? 'Success' : 'Failed!'}`);
-      return response.data;
-    } catch (error) {
-      if (error instanceof Error) logger.err(error);
+
+      return data;
+    } catch (error: unknown) {
+      if ((<AxiosError>error).code === 'ETIMEDOUT') {
+        err((<AxiosError>error).message);
+      }
       throw error;
     }
   }

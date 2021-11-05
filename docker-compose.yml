@@ -16,4 +16,3 @@ services:
 
 networks:
   metmus_network:
-    driver: bridge

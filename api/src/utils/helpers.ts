@@ -1,6 +1,5 @@
 import { join } from 'path';
 import { config as dotEnvConf } from 'dotenv';
-import { IObjectInfoBase } from '../Models';
 
 export interface IConfig {
   SKIP_PREFLIGHT_CHECK: string;
@@ -9,10 +8,11 @@ export interface IConfig {
   REDIS_NET_NAME: string;
   REDIS_PASS: string;
   REDIS_DB: string;
+  REDIS_OBJECTS_IDS_KEY: string;
 }
 
 export const defaultConfig: IConfig = {
   ...(dotEnvConf({ path: join(__dirname, '../../../.env') }).parsed as unknown as IConfig),
 };
 
-export const parseStringToModel = (objString: string | null): IObjectInfoBase | null => (objString?.length ? <IObjectInfoBase>JSON.parse(objString) : null);
+export const parseStringToModel = <T>(objString: string | null): T | null => (objString?.length ? <T>JSON.parse(objString) : null);

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
-import { getObject } from '../context/Objects';
-import useLocalStore, { CURRENT_SLIDE_KEY_NAME } from '../hooks/useLocalStore';
-import { IObjectInfoBase } from '../models/IObject';
+import { getObjectHttp } from '../../utils/http';
+import useLocalStore, { CURRENT_SLIDE_KEY_NAME } from '../../hooks/useLocalStore';
+import { IObjectInfoBase } from '../../models/IObject';
 
 import './ObjectData.css';
 
@@ -14,7 +14,7 @@ export default function ObjectData() {
   const [, storeCurrentSlide] = useLocalStore<IObjectInfoBase>(CURRENT_SLIDE_KEY_NAME, null as unknown as IObjectInfoBase);
 
   useEffect(() => {
-    getObject({ id: +id }).then(val => {
+    getObjectHttp({ id: +id }).then(val => {
       setCurrentObject(val);
       storeCurrentSlide(val);
     });
@@ -22,7 +22,7 @@ export default function ObjectData() {
 
   const backHandler = (e: any) => {
     e.preventDefault();
-    return history.goBack();
+    history.goBack();
   };
 
   if (!currentObject) return <div className='data-container'>Loading object id ${id}...</div>;

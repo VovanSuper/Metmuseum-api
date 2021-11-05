@@ -20,7 +20,11 @@ const useLocalStorage = <T>(key: string, iniValue: T) => {
     setStoredVal(valToStore);
   };
 
-  return [storedVal, setValue] as [T, (val: T) => void];
+  const emptyValue = () => {
+    window.localStorage.removeItem(key);
+  };
+
+  return [storedVal, setValue, emptyValue] as [T, (val: T) => void, () => void];
 };
 
 export default useLocalStorage;

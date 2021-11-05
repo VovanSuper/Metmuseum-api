@@ -9,7 +9,7 @@ export const routes: Route[] = [
   {
     method: 'get',
     path: '/objects',
-    middlewares: [],
+    middlewares: [requestLoggerWare],
     handler: AllObjects,
   },
   {

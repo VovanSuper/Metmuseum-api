@@ -26,15 +26,10 @@
 .main > .item-name {
   display: grid;
   place-content: center;
-  height: 10rem;
   width: 100%;
   text-decoration: none;
   text-align: center;
   position: absolute;
-  bottom: 10rem;
-}
-
-.main > .item-name > a {
+  bottom: 5%;
   color: #10854c3f;
-  text-decoration: none;
 }
